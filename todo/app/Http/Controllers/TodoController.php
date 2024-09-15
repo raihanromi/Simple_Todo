@@ -12,10 +12,8 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $todos = Todo::orderBy('completed')
-        ->orderBy('created_at', 'desc')
-        ->get();
-
+        $todos = Todo::orderBy('created_at', 'desc')->get();
+        //dd($todos);
         return view('todos.index',compact('todos'));
     }
 

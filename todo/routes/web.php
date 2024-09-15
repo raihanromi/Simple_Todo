@@ -8,3 +8,4 @@ Route::view('/','welcome');
 Route::resource('todos',TodoController::class);
 
 
+Route::post('/todos/{id}/status',[TodoController::class,'updateStatus']);

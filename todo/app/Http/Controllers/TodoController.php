@@ -12,8 +12,11 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $todos = Todo::orderBy('created_at', 'desc')->get();
-        //dd($todos);
+        
+        $todos = Todo::orderBy('complete')
+        ->orderBy('created_at', 'desc')
+        ->get();
+
         return view('todos.index',compact('todos'));
     }
 
@@ -79,6 +82,25 @@ class TodoController extends Controller
         $todo->delete();
         return redirect()->route('todos.index')->with('success', 'Task deleted successfully.');
 
+    }
+    
+    public function updateStatus($id){
+
+        
+
+        $todo = Todo::find($id);
+
+    
+
+        if($todo->complete){
+            $todo->complete= false;
+        }else{
+            $todo->complete= true;
+        }
+
+        $todo->save();
+
+        return redirect()->route('todos.index');
     }
     
 
